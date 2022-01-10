@@ -53,8 +53,6 @@ function Password(props) {
 			<Modal
 				open={modalIsOpen}
 				onClose={() => setModalIsOpen(false)}
-				aria-labelledby="modal-modal-title"
-				aria-describedby="modal-modal-description"
 			>
 				<Paper style={{
 					position: 'absolute',
