@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Password from "./pages/password";
 import Landing from "./pages/landing";
 import PasswordGen from "./pages/PasswordGen";
+import Securitychecker from "./pages/Securitychecker";
 import FAQs from "./pages/FAQs";
 import Contact from "./pages/Contact";
 import NavBar from './components/NavBar';
@@ -27,11 +28,12 @@ function App() {
         <NavBar />
         <main>
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Landing />} />
             <Route path="/password" element={<Password />} />
             <Route path="/password-generator" element={ <PasswordGen /> } />
             <Route path="/faqs" element={ <FAQs /> } />
-            <Route path="/contact" element={ <Contact /> } />
+            <Route path="/contact-us" element={ <Contact /> } />
+            <Route path="/password-security-checker" element={ <Securitychecker />} />
           </Routes>
         </main>
       </ThemeProvider>
