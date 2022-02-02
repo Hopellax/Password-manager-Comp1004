@@ -9,8 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom";
-
-const pages = ['Home', 'Password'];
+var time = <today className="getHours"></today>
+const pages = ['Home', 'Password', 'Password-Generator', 'FAQs', 'Contact us'];
 
 const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);

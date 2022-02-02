@@ -2,6 +2,9 @@ import './styles.css';
 import { Routes, Route } from "react-router-dom";
 import Password from "./pages/password";
 import Landing from "./pages/landing";
+import PasswordGen from "./pages/PasswordGen";
+import FAQs from "./pages/FAQs";
+import Contact from "./pages/Contact";
 import NavBar from './components/NavBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -26,6 +29,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/password" element={<Password />} />
+            <Route path="password-gen" element={ <PasswordGen /> } />
+            <Route path="FAQs" element={ <FAQs /> } />
+            <Route path="Contact" element={ <Contact /> } />
           </Routes>
         </main>
       </ThemeProvider>
