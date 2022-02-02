@@ -29,9 +29,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/password" element={<Password />} />
-            <Route path="password-gen" element={ <PasswordGen /> } />
-            <Route path="FAQs" element={ <FAQs /> } />
-            <Route path="Contact" element={ <Contact /> } />
+            <Route path="/password-generator" element={ <PasswordGen /> } />
+            <Route path="/faqs" element={ <FAQs /> } />
+            <Route path="/contact" element={ <Contact /> } />
           </Routes>
         </main>
       </ThemeProvider>

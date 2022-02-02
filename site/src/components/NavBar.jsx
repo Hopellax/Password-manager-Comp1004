@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom";
-var time = <today className="getHours"></today>
+
 const pages = ['Home', 'Password', 'Password-Generator', 'FAQs', 'Contact us'];
 
 const NavBar = () => {
