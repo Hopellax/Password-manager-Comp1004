@@ -19,6 +19,7 @@ function PasswordItem({ data, index, updateRow, isAdd }) {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [formData, setFormData] = React.useState(data);
   const [showPassword, setShowPassword] = React.useState(true);
+  const [icon, setIcon] = React.useState();
 
   function handleChange(e, name) {
     setFormData((x) => {
@@ -27,6 +28,17 @@ function PasswordItem({ data, index, updateRow, isAdd }) {
       return newData;
     });
   }
+
+  React.useEffect(() => {
+    (async () => {
+      if(!formData || !formData.siteurl) return
+      const raw = await fetch("https://cors-anywhere.herokuapp.com/" + formData.siteurl);
+      const text = await raw.text();
+      let row = text.split('>').find(x => x.startsWith('<link rel="shortcut icon"')).split("href=\"")[1].replace("\"", "");
+      if(row[row.length -1] == "/") row = row.substring(0, row.length - 1)
+      setIcon(row);
+    })();
+  }, [formData])
 
   async function copyToClipboard(name) {
     await navigator.clipboard.writeText(formData[name]);
@@ -60,6 +72,7 @@ function PasswordItem({ data, index, updateRow, isAdd }) {
     <>
       <div onClick={() => setModalOpen(true)}>
         <Paper className="center pointer paper">
+          {icon && (<img height="32" src={icon} />)}
           <h1>{data.sitename}</h1>
         </Paper>
       </div>

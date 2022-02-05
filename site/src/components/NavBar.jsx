@@ -42,7 +42,7 @@ const NavBar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <div style={{ display: "flex", position: "relative" }}>
-                    <h1 style={{ margin: "auto" }}>Security app</h1>
+                    <h1 style={{ margin: "auto" }}>CypherPass</h1>
                     <div style={{ position: "absolute", right: "1em", top: "1em" }}>
                         <p>{date.format("ddd MMM Do YYYY")}</p>
                         <p>{date.format("h:mm:ss a")}</p>

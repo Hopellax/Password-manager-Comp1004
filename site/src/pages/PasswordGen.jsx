@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from '@mui/material/Slider';
-import { Button, IconButton, InputAdornment, OutlinedInput, Paper, Snackbar, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, IconButton, InputAdornment, OutlinedInput, Paper, Snackbar, TextField } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 
 function Page(props) {
@@ -8,10 +8,15 @@ function Page(props) {
   const [Numberofpasswords, setNumberofpasswords] = React.useState(1);
   const [passwords, setPasswords] = React.useState();
   const [showToast, setShowToast] = React.useState(false);
+  const [useSymbols, setUseSymbols] = React.useState(true)
 
   function generatePassword() {
-    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!£$%^&*@",
-      Password = "";
+    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    if (useSymbols)
+    {
+      charset += "!£$%^&*@"
+    }
+    var Password = "";
     for (var i = 0, n = charset.length; i < length; ++i) {
       Password += charset.charAt(Math.floor(Math.random() * n));
     }
@@ -38,6 +43,8 @@ function Page(props) {
         <Slider value={length} onChange={(e) => setLength(Number(e.target.value))} aria-label="Default" valueLabelDisplay="auto" max={35} min={8} />
         <h2>Number of passwords to create: {Numberofpasswords}</h2>
         <Slider value={Numberofpasswords} onChange={(e) => setNumberofpasswords(Number(e.target.value))} aria-label="Default" valueLabelDisplay="auto" max={8} min={1} />
+        <h2></h2>
+        <FormControlLabel control={<Checkbox checked={useSymbols} onChange={() => setUseSymbols(x => !x)} />} label="Include symbols?" />
         <div style={{ margin: "2em", display: "grid", gridTemplateColumns: "1fr 1fr", placeItems: "center", rowGap: "1em" }}>
           {passwords && passwords.map(password => (
             <OutlinedInput
