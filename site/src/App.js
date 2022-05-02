@@ -1,13 +1,13 @@
 import './styles.css';
-import { Routes, Route } from "react-router-dom";
-import Password from "./pages/password";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/landing";
-import PasswordGen from "./pages/PasswordGen";
-import Securitychecker from "./pages/Securitychecker";
+import Passwords from "./pages/Passwords";
 import FAQs from "./pages/FAQs";
 import Contact from "./pages/Contact";
 import NavBar from './components/NavBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from 'react';
 
 const theme = createTheme({
   palette: {
@@ -22,18 +22,29 @@ const theme = createTheme({
 })
 
 function App() {
+  const [loggedInUser, setLogedInUser] = React.useState();
+
+  const updateUser = (user) => setLogedInUser(user);
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/home");
+    }
+  }, [window.location.href])
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <NavBar />
+        <NavBar user={loggedInUser} setUser={updateUser} />
         <main>
           <Routes>
-            <Route path="/home" element={<Landing />} />
-            <Route path="/password" element={<Password />} />
-            <Route path="/password-generator" element={ <PasswordGen /> } />
-            <Route path="/faqs" element={ <FAQs /> } />
-            <Route path="/contact-us" element={ <Contact /> } />
-            <Route path="/password-security-checker" element={ <Securitychecker />} />
+            <Route path="/home" element={<Landing user={loggedInUser} updateUser={updateUser} />} />
+            <Route path="/Dashboard" element={<Dashboard user={loggedInUser} user={loggedInUser || {}} />} />
+            <Route path="/passwords" element={<Passwords />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/contact-us" element={<Contact />} />
           </Routes>
         </main>
       </ThemeProvider>

@@ -8,16 +8,18 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
+import { Button } from '@mui/material';
 
-const pages = ['Home', 'Password', 'Password-Generator', 'Password-Security-Checker', 'FAQs', 'Contact-Us'];
+const pages = ['Home', 'Dashboard', 'Passwords', 'FAQs', 'Contact-Us'];
 
-const NavBar = () => {
+const NavBar = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [date, setDate] = React.useState(moment());
 
+    const navigate = useNavigate();
     React.useEffect(() => {
         const interval = setInterval(() => setDate(moment()), 1000);
         return () => clearInterval(interval);
@@ -38,12 +40,19 @@ const NavBar = () => {
         setAnchorElUser(null);
     };
 
+    function logout(e) {
+        e.preventDefault();
+        props.setUser(undefined);
+        navigate("/home")
+    }
+
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <div style={{ display: "flex", position: "relative" }}>
                     <h1 style={{ margin: "auto" }}>CypherPass</h1>
                     <div style={{ position: "absolute", right: "1em", top: "1em" }}>
+                        {props.user && (<p>Welcome {props.user.name}</p>)}
                         <p>{date.format("ddd MMM Do YYYY")}</p>
                         <p>{date.format("h:mm:ss a")}</p>
                     </div>
@@ -94,6 +103,9 @@ const NavBar = () => {
                                 <Link to={page.toLowerCase()}>{page.replace(/-/g, ' ')}</Link>
                             </div>
                         ))}
+                        <div className="a__navlink" >
+                            <a href="/home" style={{ paddingTop: "1em", cursor: "pointer" }} onClick={logout}>Log out</a>
+                        </div>
                     </Box>
                 </Toolbar>
             </Container>

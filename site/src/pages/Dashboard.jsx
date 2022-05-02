@@ -1,6 +1,7 @@
 import { Button, Modal, Paper, TextField } from "@mui/material";
 import React from "react";
 import PasswordItem from "../components/PasswordItem";
+import { encrypt } from "../encrypter";
 
 function Password(props) {
   const [data, setData] = React.useState([]);
@@ -9,19 +10,21 @@ function Password(props) {
   // This function will only run once on load
 
   React.useEffect(() => {
-    const rawData = window.localStorage.getItem("Bean");
+    const rawData = window.localStorage.getItem(props.user.email);
     if (rawData) {
       let json = JSON.parse(rawData);
       setData(json);
     }
   }, []);
 
+  
+
   // This function  will run every time data is changed
   React.useEffect(() => {
     // if data isn't null | undefined, save it
     if (data) {
       let jsonString = JSON.stringify(data);
-      window.localStorage.setItem("Bean", jsonString);
+      window.localStorage.setItem(props.user.email, jsonString);
     }
   }, [data]);
 
@@ -35,8 +38,9 @@ function Password(props) {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    formData.password = encrypt(formData.password)
     setData([...data, formData]);
     setModalIsOpen(false);
     setFormData({});
