@@ -1,7 +1,7 @@
 import { Button, Modal, Paper, TextField } from "@mui/material";
 import React from "react";
 import PasswordItem from "../components/PasswordItem";
-import { encrypt } from "../encrypter";
+
 
 function Password(props) {
   const [data, setData] = React.useState([]);
@@ -40,7 +40,7 @@ function Password(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    formData.password = encrypt(formData.password)
+    formData.password = (formData.password)
     setData([...data, formData]);
     setModalIsOpen(false);
     setFormData({});

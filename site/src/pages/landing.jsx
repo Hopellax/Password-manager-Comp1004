@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { width } from "@mui/system";
 import { useNavigate } from 'react-router-dom';
-import { hash, check } from "../hasher";
 import { ClassNames } from "@emotion/react";
 
 function TabPanel(props) {
@@ -51,7 +50,7 @@ function Landing(props) {
         const users = JSON.parse(data);
         const found = users.find(x => x.email = email);
         if (found) {
-            const result = await check(password, found.password)
+            const result = (password, found.password)
             if (result) {
                 props.updateUser(found);
                 navigate("/Dashboard");
@@ -76,7 +75,7 @@ function Landing(props) {
 
         const user = {
             email,
-            password: await hash(password),
+            password,
             name,
             surname
         };
